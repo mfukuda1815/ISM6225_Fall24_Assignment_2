@@ -62,8 +62,23 @@ namespace Assignment_2
         {
             try
             {
-                // Write your code here
-                return new List<int>(); // Placeholder
+                List<int> result = new List<int>();
+                for (int i = 0; i < nums.Length; i++)
+                {
+                    int val = Math.Abs(nums[i]) - 1;
+                    if (nums[val] > 0)
+                    {
+                        nums[val] = -nums[val];
+                    }
+                }
+                for (int i = 0; i < nums.Length; i++)
+                {
+                    if (nums[i] > 0)
+                    {
+                        result.Add(i + 1);
+                    }
+                }
+                return new List<int>(result); // Placeholder
             }
             catch (Exception)
             {
@@ -76,8 +91,23 @@ namespace Assignment_2
         {
             try
             {
-                // Write your code here
-                return new int[0]; // Placeholder
+                int[] result = new int[nums.Length];
+                int even = 0, odd = nums.Length - 1;
+
+                foreach (int num in nums)
+                {
+                    if (num % 2 == 0)
+                    {
+                        result[even++] = num;
+                    }
+                    else
+                    {
+                        result[odd--] = num;
+                    }
+                }
+
+                Array.Reverse(result, even, nums.Length - even);
+                return result;
             }
             catch (Exception)
             {
@@ -90,7 +120,16 @@ namespace Assignment_2
         {
             try
             {
-                // Write your code here
+                Dictionary<int, int> map = new Dictionary<int, int>();
+                for (int i = 0; i < nums.Length; i++)
+                {
+                    int numNeeded = target - nums[i];
+                    if (map.ContainsKey(numNeeded))
+                    {
+                        return new int[] { map[numNeeded], i };
+                    }
+                    map[nums[i]] = i;
+                }
                 return new int[0]; // Placeholder
             }
             catch (Exception)
@@ -104,8 +143,14 @@ namespace Assignment_2
         {
             try
             {
-                // Write your code here
-                return 0; // Placeholder
+                Array.Sort(nums);
+
+                int n = nums.Length;
+                int max1 = nums[n - 1] * nums[n - 2] * nums[n - 3];
+                int max2 = nums[0] * nums[1] * nums[n - 1]; 
+
+                return Math.Max(max1, max2);
+                //return 0; // Placeholder
             }
             catch (Exception)
             {
@@ -114,12 +159,20 @@ namespace Assignment_2
         }
 
         // Question 5: Decimal to Binary Conversion
-        public static string DecimalToBinary(int decimalNumber)
+        public static string DecimalToBinary(int decimalNum)
         {
             try
             {
-                // Write your code here
-                return "101010"; // Placeholder
+                if (decimalNum == 0) return "0";
+
+                string binary = "";
+                while (decimalNum > 0)
+                {
+                    binary = (decimalNum % 2) + binary;
+                    decimalNum /= 2;
+                }
+                return binary;
+                // return "101010"; // Placeholder
             }
             catch (Exception)
             {
@@ -132,8 +185,16 @@ namespace Assignment_2
         {
             try
             {
-                // Write your code here
-                return 0; // Placeholder
+                int min = nums[0];
+                foreach (int num in nums)
+                {
+                    if (num < min)
+                    {
+                        min = num;
+                    }
+                }
+                return min;
+                //return 0; // Placeholder
             }
             catch (Exception)
             {
@@ -146,8 +207,20 @@ namespace Assignment_2
         {
             try
             {
-                // Write your code here
-                return false; // Placeholder
+                if (x < 0) return false;
+
+                string str = x.ToString();
+                int len = str.Length;
+
+                for (int i = 0; i < len / 2; i++)
+                {
+                    if (str[i] != str[len - 1 - i])
+                    {
+                        return false;
+                    }
+                }
+                return true;
+                //return false; // Placeholder
             }
             catch (Exception)
             {
@@ -160,8 +233,21 @@ namespace Assignment_2
         {
             try
             {
-                // Write your code here
-                return 0; // Placeholder
+                if (n < 0 || n > 30)
+                {
+                    Console.WriteLine("n should be between 0 and 30. Please try again. ");
+                }
+
+                if (n <= 1) return n;
+                int a = 0, b = 1, sum;
+                for (int i = 2; i <= n; i++)
+                {
+                    sum = a + b;
+                    a = b;
+                    b = sum;
+                }
+                return b;
+                //return 0; // Placeholder
             }
             catch (Exception)
             {
